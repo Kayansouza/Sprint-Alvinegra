@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap');
+
+:root {
+  --bg-main: #0d0f14;
+  --window-bg: #11141b;
+  --top-bar: #171b24;
+  --border: #232734;
+  --accent-white: #ffffff;
+  --gray-text: #8b92a5;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  background: var(--bg-main);
+  color: var(--accent-white);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+
+  background-image: radial-gradient(
+    circle at 2% 2%,
+    rgba(255,255,255,0.05) 0%,
+    transparent 40%
+  );
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* WINDOW */
+.window {
+  background: var(--window-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+}
+
+/* TOP BAR */
+.top-bar {
+  background: var(--top-bar);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+.close {
+  background: #ff5f56;
+}
+
+.file-path {
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  color: var(--gray-text);
+  margin-left: 20px;
+}
+
+.status-badge {
+  font-size: 10px;
+  font-weight: 800;
+  border: 1px solid #fff;
+  padding: 2px 8px;
+  letter-spacing: 1px;
+}
+
+/* HERO */
+.hero {
+  padding: 100px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero small {
+  color: var(--gray-text);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 800;
+  margin: 20px 0;
+}
+
+.hero h1 span {
+  position: relative;
+  display: inline-block;
+}
+
+.hero h1 span::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--accent-white);
+  z-index: -1;
+  opacity: 0.2;
+}
+
+/* MENU */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-card {
+  padding: 40px 20px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--accent-white);
+  border-right: 1px solid var(--border);
+  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card:last-child {
+  border-right: none;
+}
+
+/* HOVER MODERNO */
+.menu-card:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-5px);
+}
+
+/* underline animation */
+.menu-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #fff;
+  transition: 0.4s;
+}
+
+.menu-card:hover::after {
+  width: 100%;
+}
+
+.menu-card i {
+  font-size: 32px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.menu-card span {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* CONTENT */
+.content-section {
+  padding: 80px 50px;
+  border-bottom: 1px solid var(--border);
+}
+
+.content-section h3 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+/* SKILLS */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill {
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+
+/* PROJECTS */
+.project-card {
+  background: #171b24;
+  padding: 30px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.project-card:hover {
+  border-color: var(--accent-white);
+  transform: scale(1.01);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.project-tech span {
+  font-size: 11px;
+  background: var(--bg-main);
+  padding: 4px 10px;
+  margin-right: 5px;
+  color: var(--gray-text);
+}
+
+/* FOOTER */
+footer {
+  padding: 60px;
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  color: var(--accent-white);
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  opacity: 0.5;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .menu {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .content-section {
+    padding: 40px 20px;
+  }
+}
