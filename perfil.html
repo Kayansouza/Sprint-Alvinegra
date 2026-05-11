@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perfil do Jogador | Richard Kayan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos Específicos para o Bento Grid do Perfil */
+    .profile-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 40px 50px;
+    }
+
+    .bento-card {
+      background: #151922;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .bento-card:hover {
+      border-color: var(--accent-white);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      background: #1a1e29;
+    }
+
+    /* Brilho interno no hover */
+    .bento-card::before {
+      content: ''; position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 10%, transparent 40%);
+      opacity: 0; transition: opacity 0.4s; pointer-events: none;
+    }
+    .bento-card:hover::before { opacity: 1; }
+
+    .span-2-col { grid-column: span 2; }
+    .span-3-col { grid-column: span 3; }
+    .span-2-row { grid-row: span 2; }
+
+    .card-icon {
+      font-size: 2rem;
+      color: var(--accent-white);
+      margin-bottom: 20px;
+      transition: var(--transition-fast);
+    }
+    .bento-card:hover .card-icon {
+      transform: scale(1.1);
+      text-shadow: var(--glow-white);
+    }
+
+    .bento-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: var(--accent-white);
+    }
+
+    .bento-card p {
+      color: var(--gray-text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .bento-card strong { color: var(--accent-white); }
+
+    /* Botão de Voltar */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray-text);
+      text-decoration: none;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      margin: 30px 0 0 50px;
+      transition: var(--transition-fast);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+    .back-btn:hover {
+      color: var(--bg-main);
+      background: var(--accent-white);
+      box-shadow: var(--glow-white);
+    }
+
+    /* Tags de Competência */
+    .comp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .comp-tags span {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--gray-text);
+    }
+
+    @media (max-width: 900px) {
+      .profile-bento { grid-template-columns: 1fr; padding: 20px; }
+      .span-2-col, .span-3-col { grid-column: span 1; }
+      .span-2-row { grid-row: auto; }
+      .back-btn { margin: 20px 0 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <section class="window">
+      
+      <div class="top-bar">
+        <div class="left">
+          <div class="controls">
+            <span class="dot close"></span>
+            <span class="dot minimize"></span>
+            <span class="dot expand"></span>
+          </div>
+          <span class="file-path">~/richard/perfil_jogador_db.sh</span>
+        </div>
+        <div class="status-badge">STATUS: INVICTO</div>
+      </div>
+
+      <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Voltar ao Terminal</a>
+
+      <div class="profile-bento">
+        
+        <div class="bento-card span-2-col">
+          <i class="fa-solid fa-fingerprint card-icon"></i>
+          <h3>Visão Geral: Código & Negócios</h3>
+          <p>
+            Desenvolvedor forjado na intersecção entre a tecnologia e o mercado. A minha atuação como <strong>Jovem Aprendiz na Alvarez & Marsal</strong> [cite: 45] permitiu-me avaliar oportunidades de investimento e apoiar startups[cite: 46, 47], desenvolvendo uma visão de negócio rara em profissionais técnicos. Hoje, a cursar <strong>Ciência da Computação</strong> [cite: 42], utilizo essa mentalidade estratégica para construir sistemas Backend robustos com <strong>Kotlin, Java e Spring Boot</strong>, criando código que não só compila, mas gera valor real para as empresas.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <i class="fa-solid fa-id-card card-icon"></i>
+          <h3>Richard Kayan de Souza </h3>
+          <p>
+            <i class="fa-solid fa-location-dot"></i> São Paulo / SP (Zona Sul) [cite: 32]<br><br>
+            <i class="fa-solid fa-language"></i> Português (Nativo) [cite: 40]<br><br>
+            <i class="fa-solid fa-bullseye"></i> <strong>Missão Atual:</strong> Estágio na área de Tecnologia / Desenvolvimento[cite: 33].
+          </p>
+        </div>
+
+        <div class="bento-card span-2-row">
+          <i class="fa-solid fa-graduation-cap card-icon"></i>
+          <h3>Arsenal Académico</h3>
+          <p style="margin-bottom: 20px;">
+            A base teórica e prática para sustentar arquiteturas invictas.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px;">
+            <li>
+              <strong style="font-size: 1.1rem;">Ciência da Computação</strong><br>
+              <span style="font-size: 0.85rem; color: var(--gray-text); font-family: 'Fira Code', monospace;">Fasul | (Fev/2025 – Jul/2028) [cite: 42]</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.1rem;">Dev. Mobile (PROA Profissão)</strong><br>
+              <span style="font-size: 0.85rem; color: var(--gray-text); font-family: 'Fira Code', monospace;">Instituto PROA | Carga: 440h [cite: 43, 44]</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bento-card span-2-col">
+          <i class="fa-solid fa-cloud-moon card-icon"></i>
+          <h3>Impacto & Inovação: Virtual Dream</h3>
+          <p>
+            A tecnologia no seu estado mais criativo. O projeto <strong>Virtual Dream (DemoDay 2026)</strong> [cite: 48] é uma aplicação mobile focada no registo e análise de sonhos, integrando funcionalidades complexas de monitorização do sono e interfaces imersivas[cite: 49, 50]. A inclusão de um <strong>sistema de gamificação</strong> [cite: 51] atesta a minha capacidade de alinhar a lógica pura do código (Backend/Mobile)  com a experiência e o envolvimento do utilizador final.
+          </p>
+        </div>
+
+        <div class="bento-card span-2-col">
+          <i class="fa-solid fa-chess-knight card-icon"></i>
+          <h3>Mindset & Competências [cite: 39]</h3>
+          <p>
+            O diferencial de quem tem a ambição de chegar a níveis executivos (CTO/CEO). Com ferramentas como Git/GitHub e Postman [cite: 38] no cinto de utilidades, garanto também a excelência no trabalho em equipa:
+          </p>
+          <div class="comp-tags">
+            <span>Comunicação Efetiva [cite: 39]</span>
+            <span>Raciocínio Lógico [cite: 39]</span>
+            <span>Capacidade Analítica [cite: 39]</span>
+            <span>Metodologias Ágeis (Scrum, Kanban) [cite: 38]</span>
+            <span>Proatividade [cite: 39]</span>
+            <span>Gestão de Tempo [cite: 39]</span>
+          </div>
+        </div>
+
+      </div>
+      
+    </section>
+  </main>
+
+</body>
+</html>
