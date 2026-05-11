@@ -268,154 +268,203 @@ footer {
   }
 }
 /* ========================================= */
-/* MAPA TÁTICO: IDENTIDADE TIMÃO             */
+/* MAPA DE CARREIRA: ONE PIECE THEME         */
 /* ========================================= */
 
-.card-roadmap-timao {
+.card-op-roadmap {
   grid-column: span 2;
   grid-row: span 2;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background: #0a0a0a; /* Preto mais profundo */
+  background: #110d0b; /* Fundo escuro com tom subtil de madeira/pergaminho */
+  border: 1px solid #3a2e28;
   padding: 30px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Cabeçalho do Card */
-.roadmap-header {
+/* Efeito de mapa antigo de fundo (Opcional) */
+.card-op-roadmap::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle at top right, rgba(212, 175, 55, 0.03), transparent 60%);
+  pointer-events: none;
+}
+
+/* Cabeçalho - Log Pose */
+.op-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid #3a2e28;
   padding-bottom: 15px;
+  margin-bottom: 25px;
+  z-index: 2;
 }
 
-.title-area {
+.op-title {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #ffffff;
 }
 
-.title-area i {
-  font-size: 1.2rem;
-  color: #ffffff;
+.op-title i {
+  color: #d4af37; /* Ouro antigo */
+  font-size: 1.5rem;
 }
 
-.title-area h3 {
-  font-size: 1.4rem;
+.op-title h3 {
+  color: #e8dcc5;
+  font-size: 1.3rem;
   font-weight: 800;
-  margin: 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  margin: 0;
 }
 
-/* Badge Fiel ao Código */
-.status-badge-fiel {
+/* Cartaz Wanted (Procura-se Estágio) */
+.op-bounty-badge {
   display: flex;
   align-items: center;
   gap: 8px;
+  background: #2a0808; /* Fundo vermelho escuro */
+  border: 1px solid #8b0000;
+  color: #ffcccc;
   font-family: 'Fira Code', monospace;
   font-size: 0.75rem;
   font-weight: 800;
-  background: #ffffff;
-  color: #000000;
-  padding: 6px 14px;
-  border-radius: 99px;
+  padding: 6px 12px;
+  border-radius: 4px;
   letter-spacing: 1px;
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
+  animation: wanted-pulse 2s infinite;
 }
 
-/* Ponto Vermelho de Destaque (Gaviões/Raça) */
-.raca-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #cf0000;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(207, 0, 0, 0.6);
-  animation: heartbeat 1.5s infinite;
+@keyframes wanted-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); border-color: #ff0000; }
 }
 
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.8; }
-}
-
-/* Blocos de Passos */
-.roadmap-blocks {
+/* Área do Mapa do Tesouro */
+.op-map-area {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  flex-grow: 1;
+  gap: 25px;
+  padding-left: 10px;
+  z-index: 2;
 }
 
-.step-block {
+/* O Caminho Tracejado (Rota no Mapa) */
+.op-dashed-path {
+  position: absolute;
+  left: 25px;
+  top: 20px;
+  bottom: 30px;
+  width: 2px;
+  border-left: 2px dashed rgba(212, 175, 55, 0.4); /* Linha tracejada dourada */
+  z-index: 1;
+}
+
+/* Ilhas (Passos da Carreira) */
+.op-island {
+  position: relative;
   display: flex;
   gap: 20px;
-  background: #111111;
-  border: 1px solid #1a1a1a;
-  border-radius: 12px;
-  padding: 20px;
-  transition: all 0.3s ease;
   opacity: 0.5;
+  transition: all 0.3s ease;
+  z-index: 2;
 }
 
-.step-block:hover {
+.op-island.active {
   opacity: 1;
-  border-color: #333333;
 }
 
-/* Fase 1: Em Destaque (Onde a mágica acontece) */
-.step-block.active {
-  background: #ffffff;
-  color: #000000;
+.op-island:hover {
   opacity: 1;
-  border-color: #ffffff;
+  transform: translateX(5px);
 }
 
-.step-number {
-  font-family: 'Fira Code', monospace;
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: #333333;
-  padding-top: 2px;
+/* Marcadores (Navio, Âncora, X) */
+.island-marker {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: #110d0b;
+  border: 2px solid #d4af37;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d4af37;
+  font-size: 0.9rem;
+  margin-top: 2px;
 }
 
-.step-block.active .step-number {
-  color: #cf0000; /* O número ganha o sangue no olho no passo atual */
+.island-marker.empty {
+  border-color: #554433;
+  color: #554433;
 }
 
-.step-info h4 {
-  font-size: 1.15rem;
-  margin-bottom: 8px;
-  font-weight: 800;
-  text-transform: uppercase;
+/* O 'X' marca o tesouro */
+.island-marker.treasure {
+  border: none;
+  background: transparent;
+  color: #8b0000; /* Vermelho sangue */
+  font-size: 1.8rem;
 }
 
-.step-info p {
+/* Efeito de Navio a navegar (Animação na fase atual) */
+.pulse-gold {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  border-radius: 50%;
+  animation: sonar-gold 2s infinite;
+}
+
+@keyframes sonar-gold {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Textos da Viagem */
+.island-info {
+  background: rgba(20, 15, 12, 0.8);
+  border: 1px solid #3a2e28;
+  padding: 15px;
+  border-radius: 12px;
+  flex-grow: 1;
+  transition: 0.3s;
+}
+
+.op-island.active .island-info {
+  border-color: #d4af37;
+  background: #1a1410;
+}
+
+.island-info h4 {
+  font-size: 1.1rem;
+  color: #e8dcc5;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.island-info p {
   font-size: 0.85rem;
-  line-height: 1.6;
-  color: #777777;
+  color: #a39581;
+  line-height: 1.5;
 }
 
-.step-block.active .step-info p {
-  color: #1a1a1a;
+.op-island.active .island-info p strong {
+  color: #d4af37;
 }
 
-.step-block.active .step-info strong {
-  color: #000000;
-}
-
+/* Responsividade */
 @media (max-width: 600px) {
-  .card-roadmap-timao {
-    grid-column: span 1;
-  }
-  .roadmap-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-  .step-block {
-    flex-direction: column;
-    gap: 10px;
-  }
+  .card-op-roadmap { grid-column: span 1; padding: 20px; }
+  .op-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .op-dashed-path { left: 25px; }
 }
