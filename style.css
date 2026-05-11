@@ -1,22 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap');
+/* ========================================= */
+/* FONTES E VARIÁVEIS GLOBAIS                */
+/* ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
 
 :root {
-  --bg-main: #0d0f14;
+  /* Identidade 2012 (Alvinegro Técnico) */
+  --bg-main: #06070a;
   --window-bg: #11141b;
   --top-bar: #171b24;
   --border: #232734;
   --accent-white: #ffffff;
   --gray-text: #8b92a5;
+  
+  /* Identidade One Piece (O Ápice) */
+  --op-gold: #d4af37;
+  --op-dark: #110d0b;
+  --op-blood: #8b0000;
+  
+  /* Animações Premium */
+  --transition-fast: all 0.2s ease;
+  --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --glow-white: 0 0 20px rgba(255, 255, 255, 0.15);
+  --glow-gold: 0 0 25px rgba(212, 175, 55, 0.4);
 }
 
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ========================================= */
+/* RESET E SCROLL                            */
+/* ========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-/* BODY */
+/* Seleção de texto personalizada */
+::selection { background: var(--accent-white); color: var(--bg-main); }
+
+/* BODY COM FUNDO INTERATIVO */
 body {
   background: var(--bg-main);
   color: var(--accent-white);
@@ -24,29 +41,29 @@ body {
   display: flex;
   justify-content: center;
   padding: 40px 20px;
-
-  background-image: radial-gradient(
-    circle at 2% 2%,
-    rgba(255,255,255,0.05) 0%,
-    transparent 40%
-  );
+  background-image: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 60%);
 }
 
-.container {
-  width: 100%;
-  max-width: 1000px;
-}
+.container { width: 100%; max-width: 1000px; perspective: 1000px; }
 
-/* WINDOW */
+/* ========================================= */
+/* JANELA PRINCIPAL (EFEITO 3D SUTIL)        */
+/* ========================================= */
 .window {
   background: var(--window-bg);
   border: 1px solid var(--border);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+  transition: var(--transition-smooth);
+}
+.window:hover {
+  box-shadow: 0 50px 120px rgba(0,0,0,0.9), 0 0 30px rgba(255,255,255,0.02);
 }
 
-/* TOP BAR */
+/* ========================================= */
+/* TOP BAR E CONTROLES (ESTILO TERMINAL)     */
+/* ========================================= */
 .top-bar {
   background: var(--top-bar);
   padding: 15px 25px;
@@ -56,42 +73,54 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-.controls {
-  display: flex;
-  gap: 8px;
+.controls { display: flex; gap: 8px; cursor: pointer; }
+.dot { 
+  width: 14px; height: 14px; border-radius: 50%; 
+  border: 1px solid transparent; 
+  background: #333842;
+  transition: var(--transition-fast); 
 }
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-}
-
-.close {
-  background: #ff5f56;
-}
+.controls:hover .close { background: #ff5f56; box-shadow: 0 0 10px #ff5f56; }
+.controls:hover .minimize { background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
+.controls:hover .expand { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
 
 .file-path {
   font-family: 'Fira Code', monospace;
   font-size: 13px;
   color: var(--gray-text);
   margin-left: 20px;
+  transition: var(--transition-fast);
 }
+.file-path:hover { color: var(--accent-white); text-shadow: var(--glow-white); }
 
 .status-badge {
   font-size: 10px;
   font-weight: 800;
-  border: 1px solid #fff;
-  padding: 2px 8px;
-  letter-spacing: 1px;
+  border: 1px solid var(--accent-white);
+  padding: 4px 10px;
+  letter-spacing: 1.5px;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--accent-white);
+  transition: var(--transition-smooth);
+  cursor: default;
+}
+.status-badge:hover {
+  background: var(--accent-white);
+  color: var(--bg-main);
+  box-shadow: var(--glow-white);
+  transform: scale(1.05);
 }
 
-/* HERO */
+/* ========================================= */
+/* HERO (ANIMAÇÕES DE TEXTO)                 */
+/* ========================================= */
 .hero {
   padding: 100px 40px;
   text-align: center;
   border-bottom: 1px solid var(--border);
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.01));
+  position: relative;
 }
 
 .hero small {
@@ -99,32 +128,32 @@ body {
   text-transform: uppercase;
   letter-spacing: 4px;
   font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  transition: var(--transition-fast);
 }
+.hero small:hover { color: var(--accent-white); letter-spacing: 6px; }
 
 .hero h1 {
   font-size: clamp(40px, 8vw, 72px);
   font-weight: 800;
   margin: 20px 0;
+  letter-spacing: -1px;
+  transition: var(--transition-smooth);
 }
+.hero h1:hover { text-shadow: 0 0 40px rgba(255,255,255,0.2); }
 
-.hero h1 span {
-  position: relative;
-  display: inline-block;
-}
-
+.hero h1 span { position: relative; display: inline-block; cursor: crosshair; }
 .hero h1 span::after {
-  content: '';
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  background: var(--accent-white);
-  z-index: -1;
-  opacity: 0.2;
+  content: ''; position: absolute; bottom: 8px; left: 0;
+  width: 0%; height: 6px; background: var(--accent-white);
+  z-index: -1; transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
+.hero h1 span:hover::after { width: 100%; box-shadow: var(--glow-white); }
 
-/* MENU */
+/* ========================================= */
+/* MENU (INTERATIVIDADE MÁXIMA)              */
+/* ========================================= */
 .menu {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -135,336 +164,198 @@ body {
   padding: 40px 20px;
   text-align: center;
   text-decoration: none;
-  color: var(--accent-white);
+  color: var(--gray-text);
   border-right: 1px solid var(--border);
-  transition: 0.4s;
+  transition: var(--transition-smooth);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
-.menu-card:last-child {
-  border-right: none;
+/* Fundo preenchendo ao passar o mouse */
+.menu-card::before {
+  content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 100%;
+  background: var(--accent-white);
+  transition: var(--transition-smooth);
+  z-index: -1;
 }
+.menu-card:hover::before { top: 0; }
 
-/* HOVER MODERNO */
-.menu-card:hover {
-  background: rgba(255,255,255,0.05);
-  transform: translateY(-5px);
-}
-
-/* underline animation */
-.menu-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: #fff;
-  transition: 0.4s;
-}
-
-.menu-card:hover::after {
-  width: 100%;
-}
+.menu-card:hover { color: var(--bg-main); transform: translateY(-3px); }
 
 .menu-card i {
   font-size: 32px;
   margin-bottom: 15px;
   display: block;
+  transition: var(--transition-smooth);
 }
+.menu-card:hover i { transform: scale(1.2) translateY(-5px); color: var(--bg-main); }
 
 .menu-card span {
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  text-transform: uppercase; font-size: 12px; font-weight: 800; letter-spacing: 2px;
 }
 
-/* CONTENT */
-.content-section {
-  padding: 80px 50px;
-  border-bottom: 1px solid var(--border);
-}
+/* ========================================= */
+/* SKILLS (TAGS MAGNÉTICAS)                  */
+/* ========================================= */
+.content-section { padding: 80px 50px; border-bottom: 1px solid var(--border); }
+.content-section h3 { font-size: 28px; margin-bottom: 30px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+.content-section p { color: var(--gray-text); line-height: 1.7; font-size: 1rem; }
+.content-section p strong { color: var(--accent-white); transition: var(--transition-fast); }
+.content-section p strong:hover { text-shadow: var(--glow-white); }
 
-.content-section h3 {
-  font-size: 32px;
-  margin-bottom: 30px;
-}
-
-/* SKILLS */
-.skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+.skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
 
 .skill {
   padding: 10px 20px;
   border: 1px solid var(--border);
   font-family: 'Fira Code', monospace;
-  font-size: 14px;
+  font-size: 13px;
+  color: var(--gray-text);
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+  cursor: crosshair;
+  background: rgba(255,255,255,0.01);
+}
+.skill:hover {
+  background: var(--accent-white);
+  color: var(--bg-main);
+  border-color: var(--accent-white);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+  font-weight: 800;
 }
 
-/* PROJECTS */
+/* ========================================= */
+/* PROJETOS (EFEITO GLASS/NEON)              */
+/* ========================================= */
 .project-card {
-  background: #171b24;
-  padding: 30px;
-  border: 1px solid var(--border);
-  margin-bottom: 20px;
-  transition: 0.3s;
+  background: #151922; padding: 30px;
+  border: 1px solid var(--border); border-radius: 12px;
+  margin-bottom: 20px; transition: var(--transition-smooth);
+  position: relative; overflow: hidden;
 }
+
+/* Brilho interno passando no card */
+.project-card::before {
+  content: ''; position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 10%, transparent 40%);
+  opacity: 0; transition: opacity 0.4s;
+  pointer-events: none;
+}
+.project-card:hover::before { opacity: 1; }
 
 .project-card:hover {
   border-color: var(--accent-white);
-  transform: scale(1.01);
+  transform: translateY(-5px);
+  background: #1a1e29;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
+.project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.project-header h4 { font-size: 1.3rem; font-weight: 700; transition: var(--transition-fast); }
+.project-card:hover h4 { color: #fff; transform: translateX(5px); }
 
+.project-header a { font-size: 1.2rem; color: var(--accent-white); transition: var(--transition-fast); }
+.project-header a:hover { color: var(--gray-text); transform: scale(1.2) rotate(10deg); }
+
+.year { font-family: 'Fira Code', monospace; font-size: 11px; color: var(--gray-text); }
+.project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
 .project-tech span {
-  font-size: 11px;
-  background: var(--bg-main);
-  padding: 4px 10px;
-  margin-right: 5px;
-  color: var(--gray-text);
+  font-size: 11px; background: var(--bg-main); padding: 4px 12px; border-radius: 4px;
+  color: var(--gray-text); border: 1px solid var(--border); transition: var(--transition-fast);
 }
+.project-card:hover .project-tech span { border-color: rgba(255,255,255,0.2); color: #fff; }
 
-/* FOOTER */
-footer {
-  padding: 60px;
-  text-align: center;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-bottom: 20px;
-}
-
-.social-icons a {
-  color: var(--accent-white);
-  font-size: 24px;
-  transition: 0.3s;
-}
-
-.social-icons a:hover {
-  opacity: 0.5;
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .menu {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .content-section {
-    padding: 40px 20px;
-  }
-}
 /* ========================================= */
-/* MAPA DE CARREIRA: ONE PIECE THEME         */
+/* MAPA DA GRAND LINE (ÉPICO E INTERATIVO)   */
 /* ========================================= */
-
 .card-op-roadmap {
-  grid-column: span 2;
-  grid-row: span 2;
-  display: flex;
-  flex-direction: column;
-  background: #110d0b; /* Fundo escuro com tom subtil de madeira/pergaminho */
-  border: 1px solid #3a2e28;
-  padding: 30px;
-  position: relative;
-  overflow: hidden;
+  grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column;
+  background: linear-gradient(180deg, var(--window-bg) 0%, var(--op-dark) 100%);
+  border-bottom: 1px solid #3a2e28; padding: 60px 50px; position: relative;
 }
 
-/* Efeito de mapa antigo de fundo (Opcional) */
-.card-op-roadmap::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: radial-gradient(circle at top right, rgba(212, 175, 55, 0.03), transparent 60%);
-  pointer-events: none;
-}
-
-/* Cabeçalho - Log Pose */
 .op-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #3a2e28;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
-  z-index: 2;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px; margin-bottom: 40px;
 }
 
-.op-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.op-title i { color: var(--op-gold); font-size: 1.8rem; animation: pulse-icon 2s infinite alternate; }
+@keyframes pulse-icon { 0% { transform: scale(1); } 100% { transform: scale(1.1); text-shadow: var(--glow-gold); } }
 
-.op-title i {
-  color: #d4af37; /* Ouro antigo */
-  font-size: 1.5rem;
-}
+.op-title h3 { color: #e8dcc5; font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
 
-.op-title h3 {
-  color: #e8dcc5;
-  font-size: 1.3rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0;
-}
-
-/* Cartaz Wanted (Procura-se Estágio) */
+/* Wanted Badge treme ao hover */
 .op-bounty-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #2a0808; /* Fundo vermelho escuro */
-  border: 1px solid #8b0000;
-  color: #ffcccc;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 6px 12px;
-  border-radius: 4px;
-  letter-spacing: 1px;
-  box-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
-  animation: wanted-pulse 2s infinite;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(212, 175, 55, 0.05); border: 1px solid var(--op-gold); color: #e8dcc5;
+  font-family: 'Fira Code', monospace; font-size: 0.75rem; font-weight: 800;
+  padding: 8px 16px; border-radius: 6px; letter-spacing: 1px;
+  animation: wanted-pulse 2s infinite; cursor: crosshair; transition: var(--transition-fast);
 }
+.op-bounty-badge:hover { background: var(--op-gold); color: var(--op-dark); transform: scale(1.05) rotate(-2deg); }
+@keyframes wanted-pulse { 0%, 100% { box-shadow: 0 0 0 rgba(212, 175, 55, 0); } 50% { box-shadow: var(--glow-gold); } }
 
-@keyframes wanted-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); border-color: #ff0000; }
-}
-
-/* Área do Mapa do Tesouro */
-.op-map-area {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding-left: 10px;
-  z-index: 2;
-}
-
-/* O Caminho Tracejado (Rota no Mapa) */
+.op-map-area { position: relative; padding-left: 20px; }
 .op-dashed-path {
-  position: absolute;
-  left: 25px;
-  top: 20px;
-  bottom: 30px;
-  width: 2px;
-  border-left: 2px dashed rgba(212, 175, 55, 0.4); /* Linha tracejada dourada */
-  z-index: 1;
+  position: absolute; left: 35px; top: 30px; bottom: 40px; width: 2px;
+  border-left: 2px dashed rgba(212, 175, 55, 0.3); z-index: 1;
 }
 
-/* Ilhas (Passos da Carreira) */
 .op-island {
-  position: relative;
-  display: flex;
-  gap: 20px;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-  z-index: 2;
+  position: relative; display: flex; gap: 30px; opacity: 0.5; margin-bottom: 30px;
+  transition: var(--transition-smooth); z-index: 2; cursor: pointer;
 }
+.op-island:hover { opacity: 1; transform: translateX(15px); }
+.op-island.active { opacity: 1; }
 
-.op-island.active {
-  opacity: 1;
-}
-
-.op-island:hover {
-  opacity: 1;
-  transform: translateX(5px);
-}
-
-/* Marcadores (Navio, Âncora, X) */
 .island-marker {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  background: #110d0b;
-  border: 2px solid #d4af37;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d4af37;
-  font-size: 0.9rem;
-  margin-top: 2px;
+  position: relative; width: 36px; height: 36px; background: var(--op-dark);
+  border: 2px solid var(--op-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: var(--op-gold); font-size: 1rem; margin-top: 5px; transition: var(--transition-smooth);
 }
+.op-island:hover .island-marker { background: var(--op-gold); color: var(--op-dark); box-shadow: var(--glow-gold); transform: scale(1.1); }
 
-.island-marker.empty {
-  border-color: #554433;
-  color: #554433;
-}
+/* A NOVA COROA DO TESOURO */
+.island-marker.treasure { border: none; background: transparent; color: var(--op-gold); font-size: 1.8rem; }
+.op-island.final:hover .island-marker.treasure { transform: scale(1.3); color: #ffffff; text-shadow: var(--glow-white); }
 
-/* O 'X' marca o tesouro */
-.island-marker.treasure {
-  border: none;
-  background: transparent;
-  color: #8b0000; /* Vermelho sangue */
-  font-size: 1.8rem;
-}
-
-/* Efeito de Navio a navegar (Animação na fase atual) */
 .pulse-gold {
-  position: absolute;
-  width: 45px;
-  height: 45px;
-  border: 1px solid rgba(212, 175, 55, 0.6);
-  border-radius: 50%;
-  animation: sonar-gold 2s infinite;
+  position: absolute; width: 50px; height: 50px; border: 1px solid rgba(212, 175, 55, 0.8);
+  border-radius: 50%; animation: sonar-gold 2s infinite; pointer-events: none;
 }
+@keyframes sonar-gold { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
 
-@keyframes sonar-gold {
-  0% { transform: scale(0.8); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
-
-/* Textos da Viagem */
 .island-info {
-  background: rgba(20, 15, 12, 0.8);
-  border: 1px solid #3a2e28;
-  padding: 15px;
-  border-radius: 12px;
-  flex-grow: 1;
-  transition: 0.3s;
+  background: rgba(20, 15, 12, 0.6); border: 1px solid #3a2e28; padding: 20px; border-radius: 12px;
+  flex-grow: 1; transition: var(--transition-smooth);
 }
+.op-island:hover .island-info { border-color: var(--op-gold); background: rgba(30, 22, 16, 0.9); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+.island-info h4 { font-size: 1.2rem; color: #e8dcc5; margin-bottom: 8px; font-weight: 700; transition: var(--transition-smooth); }
+.op-island:hover .island-info h4 { color: var(--op-gold); transform: translateX(5px); }
+.island-info p { font-size: 0.9rem; color: #a39581; line-height: 1.6; }
+.op-island.active .island-info p strong { color: var(--op-gold); }
 
-.op-island.active .island-info {
-  border-color: #d4af37;
-  background: #1a1410;
-}
+/* ========================================= */
+/* FOOTER E REDES SOCIAIS                    */
+/* ========================================= */
+footer { padding: 60px; text-align: center; }
+.social-icons { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
+.social-icons a { color: var(--gray-text); font-size: 28px; transition: var(--transition-smooth); display: inline-block; }
 
-.island-info h4 {
-  font-size: 1.1rem;
-  color: #e8dcc5;
-  margin-bottom: 6px;
-  font-weight: 700;
-}
+/* Ícones quicam e acendem ao passar o rato */
+.social-icons a:hover { color: var(--accent-white); transform: translateY(-8px) scale(1.1); filter: drop-shadow(var(--glow-white)); }
+footer p { font-size: 12px; color: var(--gray-text); font-family: 'Fira Code', monospace; }
 
-.island-info p {
-  font-size: 0.85rem;
-  color: #a39581;
-  line-height: 1.5;
-}
-
-.op-island.active .island-info p strong {
-  color: #d4af37;
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-  .card-op-roadmap { grid-column: span 1; padding: 20px; }
-  .op-header { flex-direction: column; align-items: flex-start; gap: 15px; }
-  .op-dashed-path { left: 25px; }
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .menu { grid-template-columns: 1fr 1fr; }
+  .content-section, .card-op-roadmap { padding: 40px 20px; }
+  .op-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .op-dashed-path { left: 35px; }
+  .op-island { flex-direction: column; gap: 15px; }
+  .op-island:hover { transform: translateY(-5px) translateX(0); }
+  .island-marker { margin-bottom: -10px; z-index: 5; }
 }
