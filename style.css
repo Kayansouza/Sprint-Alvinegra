@@ -77,7 +77,7 @@ body {
 .dot { 
   width: 14px; height: 14px; border-radius: 50%; 
   border: 1px solid transparent; 
-  background: #333842;
+  background: #774032;
   transition: var(--transition-fast); 
 }
 .controls:hover .close { background: #ff5f56; box-shadow: 0 0 10px #ff5f56; }

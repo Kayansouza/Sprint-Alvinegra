@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perfil do Jogador | Richard Kayan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos Específicos para o Bento Grid do Perfil */
+    .profile-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 40px 50px;
+    }
+
+    .bento-card {
+      background: #151922;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .bento-card:hover {
+      border-color: var(--accent-white);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      background: #1a1e29;
+    }
+
+    /* Brilho interno no hover */
+    .bento-card::before {
+      content: ''; position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 10%, transparent 40%);
+      opacity: 0; transition: opacity 0.4s; pointer-events: none;
+    }
+    .bento-card:hover::before { opacity: 1; }
+
+    .span-2-col { grid-column: span 2; }
+    .span-3-col { grid-column: span 3; }
+    .span-2-row { grid-row: span 2; }
+
+    .card-icon {
+      font-size: 2rem;
+      color: var(--accent-white);
+      margin-bottom: 20px;
+      transition: var(--transition-fast);
+    }
+    .bento-card:hover .card-icon {
+      transform: scale(1.1);
+      text-shadow: var(--glow-white);
+    }
+
+    .bento-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: var(--accent-white);
+    }
+
+    .bento-card p {
+      color: var(--gray-text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .bento-card strong { color: var(--accent-white); }
+
+    /* Botão de Voltar */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray-text);
+      text-decoration: none;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      margin: 30px 0 0 50px;
+      transition: var(--transition-fast);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+    .back-btn:hover {
+      color: var(--bg-main);
+      background: var(--accent-white);
+      box-shadow: var(--glow-white);
+    }
+
+    /* Tags de Competência */
+    .comp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .comp-tags span {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--gray-text);
+    }
+
+    @media (max-width: 900px) {
+      .profile-bento { grid-template-columns: 1fr; padding: 20px; }
+      .span-2-col, .span-3-col { grid-column: span 1; }
+      .span-2-row { grid-row: auto; }
+      .back-btn { margin: 20px 0 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="grid-item card-op-roadmap content-section" style="border-bottom: 1px solid #232734;">
+  <div class="op-header">
+    <div class="op-title">
+      <i class="fa-solid fa-map-location-dot"></i>
+      <h3>Mapa de Carreira</h3>
+    </div>
+
+    <div class="op-bounty-badge">
+      <i class="fa-solid fa-skull"></i>
+      WANTED: Backend Developer
+    </div>
+  </div>
+
+  <div class="op-map-area">
+    <div class="op-dashed-path"></div>
+
+    <div class="op-island active">
+      <div class="island-marker">
+        <div class="pulse-gold"></div>
+        <i class="fa-solid fa-flag"></i>
+      </div>
+
+      <div class="island-info">
+        <h4>1. Ponto de Partida — Base Técnica</h4>
+        <p>
+          Formação em tecnologia, Instituto PROA e construção dos primeiros projetos reais.
+          Foco em <strong>lógica de programação, Kotlin, Java, Spring Boot, APIs REST,
+          MySQL, MongoDB, Git e GitHub</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="op-island">
+      <div class="island-marker empty">
+        <i class="fa-solid fa-briefcase"></i>
+      </div>
+
+      <div class="island-info">
+        <h4>2. Primeira Oportunidade — Estágio em Tecnologia</h4>
+        <p>
+          Entrar no mercado para aprender com times reais, participar de projetos,
+          consumir e criar APIs, trabalhar com banco de dados e evoluir com boas práticas.
+          Objetivo: <strong>Estágio Backend ou Full Stack</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="op-island">
+      <div class="island-marker empty">
+        <i class="fa-solid fa-code"></i>
+      </div>
+
+      <div class="island-info">
+        <h4>3. Consolidação — Backend Developer Jr</h4>
+        <p>
+          Atuar com mais autonomia no desenvolvimento de features, correção de bugs,
+          integração de sistemas e criação de soluções escaláveis.
+          Foco em <strong>Spring Security, testes, Docker, arquitetura limpa e cloud</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="op-island">
+      <div class="island-marker empty">
+        <i class="fa-solid fa-server"></i>
+      </div>
+
+      <div class="island-info">
+        <h4>4. Evolução — Software Engineer Pleno</h4>
+        <p>
+          Construir sistemas maiores, pensar em performance, segurança, observabilidade,
+          microsserviços e decisões técnicas mais estratégicas.
+          Aqui começa a virada de chave para <strong>engenharia de software de verdade</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="op-island">
+      <div class="island-marker empty">
+        <i class="fa-solid fa-users-gear"></i>
+      </div>
+
+      <div class="island-info">
+        <h4>5. Liderança Técnica — Tech Lead</h4>
+        <p>
+          Guiar pessoas, revisar arquitetura, apoiar devs mais novos, tomar decisões técnicas
+          e conectar tecnologia com produto, negócio e experiência do usuário.
+        </p>
+      </div>
+    </div>
+
+    <div class="op-island final">
+      <div class="island-marker treasure">
+        <i class="fa-solid fa-crown"></i>
+      </div>
+
+      <div class="island-info">
+        <h4>6. Objetivo Final — CTO / Founder</h4>
+        <p>
+          Liderar a visão tecnológica de produtos digitais, criar soluções de impacto
+          e construir empresas ou sistemas capazes de alcançar milhares — quem sabe milhões —
+          de pessoas.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+        <div class="social-icons">
+          <a href="https://github.com/Kayansouza" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/richard-kayan" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+        <p>© 2026 DEV Richard Kayan | World Class Developer</p>
+      </footer>
+</section>
+
+
+</body>
+</html>
